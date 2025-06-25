@@ -1,9 +1,15 @@
+// --- START OF FILE script.js ---
+
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- NEW: Set current year in the footer ---
     document.getElementById('current-year').textContent = new Date().getFullYear();
+    
+    // --- API Key Configuration ---
+    // המפתח שהזנת נמצא כאן.
+    const GEMINI_API_KEY = 'AIzaSyBme5BU4ML3iDqRgfTsav4MY4GHwuuUtkM'; 
 
-    // --- DOM Element Selection (No changes here) ---
+    // --- DOM Element Selection ---
     const dilemmaInput = document.getElementById('dilemma-input');
     const spinButton = document.getElementById('spin-button');
     const wheel = document.getElementById('wheel');
@@ -13,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const resetButton = document.getElementById('reset-button');
     const inputSection = document.getElementById('input-section');
 
-    // --- Data: Humorous Explanations (No changes here) ---
+    // --- Data: Humorous Explanations (Used as a fallback) ---
     const explanations = [
         "כי היום כוכב מאדים במזל תאומים וזה אומר... משהו.",
         "כי הקלפים הקוסמיים אמרו שזו הבחירה הנכונה!",
@@ -31,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let isSpinning = false;
     let currentRotation = 0;
 
-    // --- Event Listeners (No changes here) ---
+    // --- Event Listeners ---
     spinButton.addEventListener('click', handleSpin);
     resetButton.addEventListener('click', resetUI);
     dilemmaInput.addEventListener('keypress', (e) => {
@@ -40,8 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-
-    // --- Core Functions (No changes here) ---
+    // --- Core Functions ---
 
     function handleSpin() {
         if (isSpinning) return;
@@ -57,14 +62,12 @@ document.addEventListener('DOMContentLoaded', () => {
         startSpinning(options);
     }
 
-
     function showError() {
         dilemmaInput.classList.add('shake-error');
         setTimeout(() => {
             dilemmaInput.classList.remove('shake-error');
         }, 500);
     }
-
 
     function startSpinning(options) {
         isSpinning = true;
@@ -86,13 +89,65 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 4000);
     }
 
+    // --- AI Explanation Function (Corrected) ---
+    async function getAIExplanation(dilemma, choice) {
+        // התנאי המתוקן: בודק אם המפתח ריק או שהוא עדיין ממלא המקום המקורי.
+        if (!GEMINI_API_KEY || GEMINI_API_KEY === 'YOUR_GOOGLE_AI_API_KEY') {
+            console.warn("API Key not provided. Falling back to static explanations.");
+            return explanations[Math.floor(Math.random() * explanations.length)];
+        }
 
-    function finishSpinning(options) {
+        // ✅ בקוד המתוקן
+const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API_KEY}`;
+        const prompt = `אתה "גלגל הדילמות הקוסמי", אורקל מיסטי והומוריסטי. משתמש התלבט לגבי "${dilemma}". הגלגל בחר עבורו את האפשרות: "${choice}". 
+        כתוב משפט הסבר קצר, יצירתי ומצחיק בעברית, שמסביר מדוע זו הבחירה הנכונה. דבר בטון מיסטי, מעט אבסורדי והומוריסטי. אל תחזור על המילה "כי" בתחילת התשובה.`;
+
+        try {
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    contents: [{
+                        parts: [{ text: prompt }]
+                    }]
+                })
+            });
+
+            if (!response.ok) {
+                const errorBody = await response.json().catch(() => ({ error: { message: "Could not parse error response." } }));
+                console.error("API Response not OK:", response.status, response.statusText, errorBody);
+                throw new Error(`API Error: ${response.status} ${response.statusText}. Message: ${errorBody.error?.message || 'No details'}`);
+            }
+
+            const data = await response.json();
+            
+            if (!data.candidates || data.candidates.length === 0) {
+                 console.warn("AI response was empty. Falling back to static explanation.");
+                 return explanations[Math.floor(Math.random() * explanations.length)];
+            }
+            
+            const aiText = data.candidates[0].content.parts[0].text;
+            return aiText.trim();
+
+        } catch (error) {
+            console.error("Error fetching AI explanation:", error);
+            return explanations[Math.floor(Math.random() * explanations.length)];
+        }
+    }
+
+    // --- Finish Spinning (Async) ---
+    async function finishSpinning(options) {
         const randomChoice = options[Math.floor(Math.random() * options.length)];
-        const randomExplanation = explanations[Math.floor(Math.random() * explanations.length)];
-
+        
         resultText.textContent = `${randomChoice}!`;
-        explanationText.textContent = randomExplanation;
+        explanationText.textContent = "הקוסמוס רוקם עבורך תשובה...";
+
+        const fullDilemma = dilemmaInput.value.trim();
+        const aiExplanation = await getAIExplanation(fullDilemma, randomChoice);
+
+        explanationText.textContent = aiExplanation;
         
         resultSection.classList.remove('hidden');
         resultSection.classList.add('fade-in-up');
@@ -101,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
         isSpinning = false;
     }
     
-    
+    // --- Reset UI ---
     function resetUI() {
         resultSection.classList.add('hidden');
         resultSection.classList.remove('fade-in-up');
@@ -118,3 +173,5 @@ document.addEventListener('DOMContentLoaded', () => {
         wheel.classList.remove('spinning');
     }
 });
+
+// --- END OF FILE script.js ---
