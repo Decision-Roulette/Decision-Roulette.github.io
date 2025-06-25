@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>גלגל הדילמות הקוסמי</title>
+
+    <!-- Import TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Import Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Import Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Import JavaScript (deferred to load after HTML) -->
+    <script src="script.js" defer></script>
+</head>
+<!-- MODIFIED: Changed body classes to handle footer placement -->
+<body class="bg-slate-900 text-white font-sans flex flex-col min-h-screen">
+
+    <!-- MODIFIED: Added flex-grow to push footer down, and centered content within main -->
+    <main class="w-full max-w-2xl mx-auto flex flex-col items-center justify-center space-y-8 text-center p-4 flex-grow">
+
+        <!-- Header Section (No changes here) -->
+        <header>
+            <h1 class="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 mb-2">
+                גלגל הדילמות הקוסמי
+            </h1>
+            <p class="text-slate-400 text-lg md:text-xl">
+                נתקעתם? תנו לגורל (ולקוד אקראי) להחליט בשבילכם.
+            </p>
+        </header>
+
+        <!-- Roulette Wheel Section (No changes here) -->
+        <section id="wheel-container" class="relative w-64 h-64 md:w-80 md:h-80 flex items-center justify-center">
+            <div id="wheel" class="wheel-body">
+                <!-- The pointer is created with CSS pseudo-elements -->
+            </div>
+        </section>
+
+        <!-- Input Section (No changes here) -->
+        <section id="input-section" class="w-full transition-opacity duration-500">
+            <div class="flex flex-col sm:flex-row gap-4 items-center justify-center">
+                <input type="text" id="dilemma-input" placeholder="למשל: לאכול סושי או פיצה?"
+                       class="w-full sm:w-2/3 bg-slate-800 border-2 border-slate-600 rounded-lg py-3 px-4 text-center text-lg focus:border-cyan-400 focus:ring-cyan-400 focus:outline-none transition-all duration-300">
+                <button id="spin-button"
+                        class="w-full sm:w-auto bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-white font-bold py-3 px-8 rounded-lg text-lg shadow-lg hover:shadow-cyan-500/50 transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-star-of-life"></i>
+                    <span>סובב את הגלגל!</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Result Section (No changes here) -->
+        <section id="result-section" class="hidden w-full max-w-lg bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl border border-slate-700">
+            <h2 class="text-3xl md:text-4xl font-bold text-cyan-400" id="result-text"></h2>
+            <p class="text-slate-300 mt-4 text-lg md:text-xl" id="explanation-text"></p>
+            <button id="reset-button"
+                    class="mt-6 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-400 hover:to-pink-400 text-white font-bold py-2 px-6 rounded-lg text-md shadow-lg hover:shadow-purple-500/50 transition-all duration-300 transform hover:scale-105">
+                יש לי דילמה נוספת...
+            </button>
+        </section>
+    </main>
+
+    <!-- NEW: Footer Section -->
+    <footer class="w-full text-center p-6 border-t border-slate-800">
+        <div class="text-slate-400 text-sm space-y-2">
+            <p>
+                © <span id="current-year"></span> גלגל הדילמות הקוסמי. כל הזכויות שמורות (בערך).
+            </p>
+            <p class="flex items-center justify-center gap-2">
+                <span>נוצר באהבה וקצת אבק כוכבים</span>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="text-slate-300 hover:text-cyan-400 transition-colors">
+                    <i class="fab fa-github fa-lg"></i>
+                </a>
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
