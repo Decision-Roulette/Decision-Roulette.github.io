@@ -52,8 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isSpinning) return;
 
         const dilemma = dilemmaInput.value.trim();
-        const options = dilemma.split(' או ').map(opt => opt.trim()).filter(opt => opt.length > 0);
-
+        // ✅ הקוד החדש
+const options = dilemma.replace(/\?$/, '').split(' או ').map(opt => opt.trim()).filter(opt => opt.length > 0);
         if (dilemma === '' || options.length < 2) {
             showError();
             return;
