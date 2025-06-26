@@ -40,19 +40,26 @@
             </div>
         </section>
 
-        <!-- Input Section (No changes here) -->
-        <section id="input-section" class="w-full transition-opacity duration-500">
-            <div class="flex flex-col sm:flex-row gap-4 items-center justify-center">
-                <input type="text" id="dilemma-input" placeholder="למשל: לאכול סושי או פיצה?"
-                       class="w-full sm:w-2/3 bg-slate-800 border-2 border-slate-600 rounded-lg py-3 px-4 text-center text-lg focus:border-cyan-400 focus:ring-cyan-400 focus:outline-none transition-all duration-300">
-                <button id="spin-button"
-                        class="w-full sm:w-auto bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-white font-bold py-3 px-8 rounded-lg text-lg shadow-lg hover:shadow-cyan-500/50 transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-star-of-life"></i>
-                    <span>סובב את הגלגל!</span>
-                </button>
-            </div>
-            <p class="text-slate-400 text-sm mt-3">השתמשו במילה 'או' כדי להפריד בין האפשרויות.</p>
-        </section>
+        <!-- Input Section (MODIFIED) -->
+<section id="input-section" class="w-full transition-opacity duration-500">
+    <div class="flex flex-col sm:flex-row gap-4 items-center justify-center">
+        <!-- Replaced <input> with <textarea> to allow multiple lines -->
+        <textarea id="dilemma-input" 
+                  placeholder="אפשרות 1
+אפשרות 2
+או אפשרות 3..."
+                  rows="3"
+                  class="w-full sm:w-2/3 bg-slate-800 border-2 border-slate-600 rounded-lg py-3 px-4 text-center text-lg focus:border-cyan-400 focus:ring-cyan-400 focus:outline-none transition-all duration-300 resize-none"></textarea>
+
+        <button id="spin-button"
+                class="w-full sm:w-auto bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-white font-bold py-3 px-8 rounded-lg text-lg shadow-lg hover:shadow-cyan-500/50 transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2">
+            <i class="fa-solid fa-star-of-life"></i>
+            <span>סובב את הגלגל!</span>
+        </button>
+    </div>
+    <!-- Updated instructions -->
+    <p class="text-slate-400 text-sm mt-3">הפרידו בין אפשרויות באמצעות המילה 'או' או בירידת שורה (Enter).</p>
+</section>
         
 
         <!-- Result Section (No changes here) -->
