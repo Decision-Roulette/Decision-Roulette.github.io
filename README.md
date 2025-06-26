@@ -75,4 +75,6 @@ npx http-server
 
 
 
-[![Star History](https://api.star-history.com/svg?repos=Decision-Roulette/Decision-Roulette.github.io&type=Date)](https://star-history.com/#Decision-Roulette/Decision-Roulette.github.io&Date)
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=Decision-Roulette/Decision-Roulette.github.io&type=Date)](https://www.star-history.com/#Decision-Roulette/Decision-Roulette.github.io&Date)
