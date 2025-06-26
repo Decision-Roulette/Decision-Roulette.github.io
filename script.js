@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // ✅ בקוד המתוקן
-const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemma-3-2b-it:generateContent?key=${GEMINI_API_KEY}`;
+const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemma-3-4b-it:generateContent?key=${GEMINI_API_KEY}`;
         const prompt = `אתה "גלגל הדילמות הקוסמי", אורקל מיסטי והומוריסטי. משתמש התלבט לגבי "${dilemma}". הגלגל בחר עבורו את האפשרות: "${choice}". 
         כתוב משפט הסבר קצר, יצירתי ומצחיק בעברית, שמסביר מדוע זו הבחירה הנכונה. דבר בטון מיסטי, מעט אבסורדי והומוריסטי. אל תחזור על המילה "כי" בתחילת התשובה.`;
 
