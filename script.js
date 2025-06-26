@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // --- API Key Configuration ---
     // המפתח שהזנת נמצא כאן.
-    const GEMINI_API_KEY = 'AIzaSyBme5BU4ML3iDqRgfTsav4MY4GHwuuUtkM'; 
+    const GEMINI_API_KEY = 'AIzaSyA6wvTl9h6o-rxffxRC13h-IVWoeqJoXaU'; 
 
     // --- DOM Element Selection ---
     const dilemmaInput = document.getElementById('dilemma-input');
