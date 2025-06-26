@@ -40,12 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Event Listeners ---
     spinButton.addEventListener('click', handleSpin);
     resetButton.addEventListener('click', resetUI);
-    dilemmaInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            handleSpin();
-        }
-    });
-
     // --- Core Functions ---
 
     function handleSpin() {
